@@ -1,62 +1,110 @@
-let speed;
+//https://forum.processing.org/two/discussion/14156/processing-how-to-make-balls-collide-off-of-each-other
 
-let x;
-let y;
-let angle;
-let a, b, c, d;
+let numBalls = 100;
+let spring =   1; // or 1.0 ???
+let gravity = 0.1;
+let balls = [];
+let friction = 0.9;
+let img;
+//
 
-function setup(){
-  createCanvas(600,600);
-  speed = 2;
-  y = 50;
-  a=0;
-  b=0;
-  c=0;
-  d=0;
-}
-
-function draw()
-{
-
-  background(0);
-
-  if (x>= 0 && x <= 300){
-    fill(255, 0, 0);
-  } else if (x>= 300 && x <= 450){
-    fill(0, 255, 0);
-  } else if (x>= 450 && x <= 600){
-    fill(0, 0, 255);
+ 
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  img = createImg('assets/0.png');
+  for (let i = 0; i < numBalls; i++) {
+    balls[i] = new Ball(random(width), random(height), 40, i, balls, img);
   }
-
-  y = 50*sin(angle)+height/2;
-  
-  angle += 0.1;
-  
   noStroke();
-  ellipse(x, y, 20, 20);
-  
-  x += speed;
-  
-  if (x >= 591){
-   speed = -2;
-  } else if (x < 10){
-    speed = 2;
-  } 
-
-  pushMatrix();
-  fill(255);
-  rect(a, b, c, d);
-  popMatrix();
-} 
-
-function mousePressed() {
-  a=mouseX;
-  b=mouseY;
+  fill(255, 204);
 }
-
-
-function mouseDragged() {
-  c=mouseX-a;
-  d=mouseY-b;
-  rect(a, b, c, d);
+ 
+function draw() {
+  background(0);
+  balls.forEach (ball => {
+    ball.collide();
+    ball.move();
+    ball.display();
+  });
 }
+ 
+// ==========================================================================
+ 
+class Ball {
+ 
+  // the constructor
+  constructor(xin, yin, din, idin, oin, text_img_in) {
+    this.x = xin;
+    this.y = yin;
+    this.vx = 0;
+    this.vy = 0;
+    this.diameter = din;
+    this.id = idin;
+    this.others = oin;
+    this.pic = text_img_in;
+
+  }
+ 
+  collide() {
+    // we start one ball higher in the list (id+1) and compare 
+    for (let i = this.id + 1; i < numBalls; i++) {
+ 
+      let dx = this.others[i].x - this.x;
+      let dy = this.others[i].y - this.y;
+ 
+      let distance = dist(this.x, this.y, 
+        this.others[i].x, this.others[i].y );   // sqrt(dx*dx + dy*dy);  // new !!!
+ 
+      let minDist = (this.others[i].diameter/2 + this.diameter/2 + 2); // +2 is new !!! 
+ 
+      if (distance < minDist) { 
+        let angle = atan2(dy, dx);
+        // targetX = this.x + cos(angle) * minDist;
+        //let targetY = this.y + sin(angle) * minDist;
+        let targetX = this.x + (cos(angle) * minDist);
+        let targetY = this.y + (sin(angle) * minDist);
+ 
+        // calculate the change of speed for both balls 
+        let ax = (targetX - this.others[i].x) * spring;
+        let ay = (targetY - this.others[i].y) * spring;
+        this.vx = this.vx*friction - ax;
+        this.vy = this.vy*friction - ay;
+        this.others[i].vx += ax;
+        this.others[i].vy += ay;
+      }
+    }
+  }
+ 
+  move() {
+    this.vy += gravity;
+ 
+    this.x += this.vx;
+    this.y += this.vy;
+ 
+    // collide screeen borders 
+    if (this.x + this.diameter > width) {
+      this.x = width - this.diameter;
+      this.vx = -friction * abs(this.vx);
+    } else if (this.x - this.diameter/100 < 0) {
+      this.x = this.diameter/100;
+      this.vx = friction * abs(this.vx);
+      ;
+    }
+    if (this.y + this.diameter > height) {
+      this.y = height - this.diameter;
+      this.vy = -friction * abs(this.vx);
+    } else if (this.y - this.diameter < 0) {
+      this.y = this.diameter;
+      this.vy = friction * abs(this.vx);
+    }
+  }
+ 
+  display() {
+    //fill(255,50); 
+    //textFont('CourierNew');
+    //rect(this.x, this.y, this.diameter, this.diameter);
+    image(this.pic, this.x, this.y, this.diameter, this.diameter);
+    
+  }//method
+}//class
+//
