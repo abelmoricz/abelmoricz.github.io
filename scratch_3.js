@@ -1,11 +1,38 @@
-var img; function preload(){ 
-	arrowMouse = createImg("test.png"); 
-	} 
-	function setup(){ 
-	createCanvas(1000,650); 
-	} 
-	function draw(){ 
-	background(20,155,255); 
-	fill(0,0,0); cursor("none"); 
-	image(arrowMouse, mouseX, mouseY,40,40); 
-	}
+/**
+ * LoadImageErrorOverride (v1.12)
+ * by GoToLoop (2015/Jul/09)
+ *
+ * forum.Processing.org/two/discussion/11608/
+ * i-can-t-display-images-dynamically-loaded-from-web-
+ * with-p5-js-always-a-cross-domain-issue#Item_3
+ */
+ 
+const URL = 'assets/0.png';
+ 
+var img;
+ 
+function loadImageErrorOverride(errEvt) {
+  const pic = errEvt.target;
+ 
+  if (!pic.crossOrigin)  return print('Failed to reload ' + pic.src + '!');
+ 
+  print('Attempting to reload it as a tainted image now...');
+  pic.crossOrigin = null, pic.src = pic.src;
+}
+ 
+function preload(){
+	loadImage(URL,function (pic) { print(img = pic), redraw(); },
+  loadImageErrorOverride);
+}
+
+function setup() {
+  createCanvas(500, 400);
+  noLoop();
+ 
+  //loadImage(URL,function (pic) { print(img = pic), redraw(); },
+  //loadImageErrorOverride);
+}
+ 
+function draw() {
+  background(img || 0350);
+}
