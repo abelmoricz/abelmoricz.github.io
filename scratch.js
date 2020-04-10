@@ -64,17 +64,14 @@ function draw() {
 }
 
 class Ball {
-  constructor(xin, yin, width_in, idin, oin, txt_in, txt_sz_in, num_lines) {
+  constructor(xin, yin, idin, oin) {
     this.x = xin;
     this.y = yin;
-    this.velocity_x = 3;
-    this.velocity_y = 3;
-    this.width =((width_in/num_lines)/(10/txt_sz_in));
-    this.height = txt_sz_in*num_lines;
+    this.vx = 0;
+    this.vy = 0;
     this.id = idin;
     this.others = oin;
-    this.text = txt_in;
-    this.text_size = txt_sz_in;
+    
 
   }
   /*fill(255,0,0);

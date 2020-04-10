@@ -1,5 +1,54 @@
 body {
-    padding: 0px;
-    margin: 0px;
-    background-color: red;
+    margin:0;
 }
+
+#nav{
+    position: fixed;
+    left: 50%;
+    margin-left: -300px;
+    width: 600px;
+    display: block; 
+    margin-top: 50px;
+}
+#AM{
+    font-size: 26;
+    float: left;
+    cursor: pointer;
+    font-weight: normal;
+    text-decoration: underline;
+}
+#P{
+    font-size:26;
+    float:left;
+    margin-left: 19%;
+    cursor:pointer;
+    font-weight: normal;
+}
+#CM{
+    font-size:26;
+    margin-left: 75%;
+    cursor:pointer;
+    font-weight: normal;
+}
+
+#about_me {
+    position: fixed;
+    font-size: small;
+    left: 50%;
+    margin-left: -300px;
+    width: 600px;
+    margin-top: 150px;
+}
+
+#projects {
+    position: fixed;
+    font-size: small;
+    left: 50%;
+    margin-left: -300px;
+    width: 600px;
+    margin-top: 150px;
+    display: none;
+}
+
+
+
