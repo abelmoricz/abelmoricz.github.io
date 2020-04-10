@@ -4,11 +4,68 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.sound.min.js"></script>
-    <script src="/p5.collide2D-master/p5.collide2d.js"></script>
+    <script src="p5.SceneManager-master/lib/scenemanager.js"></script>
     <script src="resize_p5_func.js"></script>
+
+    <script src="html_navigation.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="scratch_2.js"></script>
   </head>
-  <body>
-  </body>
+  <body></body>
+  <div id="all">
+    <div id="nav">
+      <h3 id="AM" onclick="about_me()">About Me</h3>
+      <h3 id="P" onclick="projects()">Projects</h3>
+      <h3 id="CM" onclick="projects()">Click This</h3>
+
+    </div>
+    
+
+    <div id="about_me">
+        I’m currently a Business Informatics major at the University of Vienna in Austria. 
+        Don’t be fooled by the name as this is a Computer Science major with an emphasis on enterprises 
+        (I had to take the CS entrance exam after all). Previously I studied Business Administration 
+        at the University of Massachusetts at Amherst.<br><br><br>
+
+        Background and Philosophy:<br>
+        Born in Austria, I was fortunate to complete high school in the United States,
+        and spend time on the west coast, east coast and midwest. 
+        At University the idea of value driven production and design impacted me deeply. 
+        Professional as well as personally I aim to never create a solution to a non-existent problem.
+        And I don’t think that can be said for everyone. My four college level courses in 2D/3D Design,
+        Figure Drawing and Portrait Drawing developed my artistic side and I believe that value can come from many places.
+        Transferring Universities has been challenging in many ways but I’ve never been happier with what direction my life is taking.
+      </div>
+
+      <div id="projects">
+        <div style="text-align: center;">This Website. <br>
+          Have you broken it yet? <br>
+          And put it back together? <br>
+          I have. <br>
+          About a million times. <br><br><br></div>
+        
+
+        Deep Dream Graphical User Interface:<br>
+        I’m intrigued by Google’s Deep Dream but was frustrated by the long rendering time and lack of visual organizations. 
+        I decided to build 3 different levels of complexity. First, a menu with small thumbnails gives an initial impression 
+        of each feature. Second, native feature visualization creates a small (300x300) picture within seconds. 
+        Third, an overlaying of the feature on an image or native feature which can take the good part of a minute.
+        I added image classification and have the intention to expand the project to make feature creation more intuitive.<br><br>
+        
+        Website for Biogärtnerei Florian Kamlah:<br>
+        Badly in need of a website redesign I built the website for this family farm. Initially I wanted to use a framework 
+        like Angular but I soon realized that the ideal solution was not the most technically sophisticated one. An all in 
+        one hosting and web design service proved to be the most economical and requires the least effort to update. Even though 
+        I didn’t get to implement and expand my Angular knowledge I did provide the most value added solution to the customer, 
+        for which, of course, I was compensated.
+        
+        
+        
+
+      </div>
+  </div>
+    
+    
+
+
 </html>
