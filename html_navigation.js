@@ -1,11 +1,10 @@
 function change_to_p5() {
     var x = document.getElementById("all");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
       x.style.display = "none";
-    }
+      
+
   } 
+
 
 function about_me() {
     var about_me = document.getElementById("about_me");
