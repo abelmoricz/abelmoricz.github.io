@@ -17,24 +17,25 @@ body {
     display: block; 
     margin-top: 50px;
 }
-#AM{
-    font-size: 26;
-    float: left;
+h3 {
     cursor: pointer;
     font-weight: normal;
+    font-size: 26;
+}
+h2{
+    font-weight: normal;
+    font-size: 36
+}
+
+#AM{
+    float: left;
 }
 #P{
-    font-size:26;
     float:left;
     margin-left: 18%;
-    cursor:pointer;
-    font-weight: normal;
 }
 #CM{
-    font-size:26;
     margin-left: 73%;
-    cursor:pointer;
-    font-weight: normal;
 }
 
 #about_me {

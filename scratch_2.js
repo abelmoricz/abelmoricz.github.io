@@ -11,12 +11,13 @@
 
 var mgr;
 let img;
-let back_button_img;
+let instruction_img;
+let back_img;
 let img_arr = [];
-let col_num = 9;
+let col_num = 8;
 let row_num;
-let row_num_about = 5;
-let row_num_projects = 7;
+let row_num_about = 6;
+let row_num_projects = 6;
 let correct_pieces = 0;
 
 let side_length = 80;
@@ -55,7 +56,10 @@ function setup()
     }
 
     //back button loading
-    back_button_img = loadImage('back_button.png',function (pic) { print(img = pic), redraw(); },
+    instruction_img = loadImage('instructions.png',function (pic) { print(img = pic), redraw(); },
+    loadImageErrorOverride);
+
+    back_img = loadImage('back.png',function (pic) { print(img = pic), redraw(); },
     loadImageErrorOverride);
     
     // = row_num_projects;
@@ -81,11 +85,19 @@ function mousePressed(){ mgr.handleEvent("mousePressed"); }
 
 
 check_for_ending = function() {
-  if(correct_pieces >= 5){
-    console.log("check for ending function called");
-    //erase();
-    //location.href = "win.html";
-    //window.location.reload(false);
+  if(correct_pieces >= img_arr.length){
+    mgr.showScene( End );
+  }
+}
+
+function End() {
+  this.setup = function(){
+    createCanvas(windowWidth, windowHeight);
+  }
+  this.draw = function() {
+    noLoop();
+    background(100);
+    window.location.replace("file:///home/abel/abelmoricz.github.io/win.html");
 
   }
 }
@@ -102,7 +114,7 @@ function FallApart(){
       //display images
       let pic_counter = 0;
       let x_offset = (windowWidth*.5)-366;
-      let y_offset =39;
+      let y_offset =85;
 
     for(let i = 0; i < row_num; ++i){
       for (let j = 0; j < col_num; ++j){
@@ -110,15 +122,15 @@ function FallApart(){
         pic_counter += 1;
       }
     }
-    balls[pic_counter] = new Ball(width-side_length, 0, side_length,pic_counter, balls, back_button_img, false)
+    balls[pic_counter] = new Ball(width-side_length, 0, side_length,pic_counter, balls, instruction_img, false)
+    pic_counter += 1;
+    balls[pic_counter] = new Ball(width-side_length, side_length, side_length,pic_counter, balls, back_img, false)
       noStroke();
     }
   
     this.draw = function() {
       background(255);
       fill(100);
-
-      
       
       balls.forEach (ball => {
         ball.display();
@@ -136,8 +148,6 @@ function FallApart(){
     }
   
   // ==========================================================================
-  
-
     
 
   class Ball {
@@ -154,7 +164,6 @@ function FallApart(){
       this.id = idin;
       this.others = oin;
       this.pic = text_img_in;
-      this.stroke_weight = 1;
       this.movable = movable_in;
 
     }
@@ -183,6 +192,7 @@ function FallApart(){
         }
 
         if(distance_x > distance_y){
+
           right_bounce = true;
           left_bounce = true;
           top_bounce = false;
@@ -193,7 +203,7 @@ function FallApart(){
           right_bounce = true;
           left_bounce = false;
         }
-        if(dx < 0 && distance_x > distance_y){
+        if(dx <= 0 && distance_x > distance_y){
           right_bounce = false;
           left_bounce = true;
         }
@@ -207,8 +217,8 @@ function FallApart(){
         }
         //LEFT and RIGHT bounce
         if(distance_x <= side_length && distance_y <= side_length && distance_x != 0 && (right_bounce || left_bounce)){
-          if(right_bounce){ this.x = this.others[i].x - side_length; }
-          if(left_bounce){ this.x = this.others[i].x + side_length; }
+          if(right_bounce){ this.x = this.others[i].x - side_length-1; }
+          if(left_bounce){ this.x = this.others[i].x + side_length+1; }
           
           let temp = this.vx;
           if(this.movable && this.others[i].movable){
@@ -219,10 +229,10 @@ function FallApart(){
             this.vx *= -1;
           }
           
-        }
+        }//TOP and BOTTOM bounce
         if(distance_x <= side_length && distance_y <= side_length && (distance_y != 0) && (top_bounce || bottom_bounce)){
-          if(top_bounce){ this.y = this.others[i].y + side_length; }
-          if(bottom_bounce){ this.y = this.others[i].y -side_length; }
+          if(top_bounce){ this.y = this.others[i].y + side_length+1; }
+          if(bottom_bounce){ this.y = this.others[i].y -side_length-1; }
           
           let temp = this.vy
           if(this.movable && this.others[i].movable){
@@ -262,13 +272,17 @@ function FallApart(){
         this.y = 0;
         this.vy = abs(this.vy);
       }
+      if(!this.movable){
+        this.x = this.original_x;
+        this.y = this.original_y;
+      }
     }
   
     display() {
       image(this.pic, this.x, this.y, this.diameter, this.diameter);
       fill(255,0)
-      stroke(0, 50);
-      strokeWeight(this.stroke_weight);      
+      stroke(0, 75);
+      strokeWeight(1);      
       rect(this.x, this.y, this.diameter, this.diameter); 
     }
     
@@ -282,8 +296,6 @@ function FallApart(){
             correct_pieces += 1;
           }
           this.movable = false; 
-          //correct_pieces += 1;
-          console.log(correct_pieces);
         }
       }
     go_back() {
@@ -292,7 +304,6 @@ function FallApart(){
       }
       
     }
-
     
     //method
   }//class
