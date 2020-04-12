@@ -1,3 +1,10 @@
+
+
+html{
+    font-family: 'Courier New', Courier, monospace;
+    text-align: justify;
+}
+
 body {
     margin:0;
 }
@@ -15,18 +22,17 @@ body {
     float: left;
     cursor: pointer;
     font-weight: normal;
-    text-decoration: underline;
 }
 #P{
     font-size:26;
     float:left;
-    margin-left: 19%;
+    margin-left: 18%;
     cursor:pointer;
     font-weight: normal;
 }
 #CM{
     font-size:26;
-    margin-left: 75%;
+    margin-left: 73%;
     cursor:pointer;
     font-weight: normal;
 }
@@ -48,7 +54,7 @@ body {
     margin-left: -300px;
     width: 600px;
     margin-top: 150px;
-    display: none;
+    display: block;
 }
 
 

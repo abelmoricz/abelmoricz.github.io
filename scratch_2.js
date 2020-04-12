@@ -17,9 +17,11 @@ let col_num = 9;
 let row_num;
 let row_num_about = 5;
 let row_num_projects = 7;
+let correct_pieces = 0;
 
 let side_length = 80;
 let whole_img = 'about_me';
+
 
 function loadImageErrorOverride(errEvt) {
   const pic = errEvt.target;
@@ -28,21 +30,22 @@ function loadImageErrorOverride(errEvt) {
   pic.crossOrigin = null, pic.src = pic.src;
 }
 
+
+
 function setup()
 {
     mgr = new SceneManager();
     //preloads images
     row_num = row_num_about;
 
-    if(document.getElementById("about_me").style.display === "block"){
-      row_num = row_num_about;
-      whole_img = 'about_me'
-    }
-    if(document.getElementById("projects").style.display === "block"){
-      //console.log(document.getElementById("projects").style.display === "block");
+    let document_url = String(document.location.href);
+    if(document_url.slice(document_url.length-13,document_url.length) === "projects.html"){
+
       row_num = row_num_projects;
       whole_img = 'projects';
     }
+  
+    
 
 
     for(let i = 0; i < (col_num*row_num); ++i){
@@ -69,9 +72,23 @@ function draw()
     if(html_element.style.display === "none"){
       mgr.showScene( FallApart );
     }
+    check_for_ending();
+
+    
 }
 
 function mousePressed(){ mgr.handleEvent("mousePressed"); }
+
+
+check_for_ending = function() {
+  if(correct_pieces >= 5){
+    console.log("check for ending function called");
+    //erase();
+    //location.href = "win.html";
+    //window.location.reload(false);
+
+  }
+}
 
 //================================================================================================================================
 
@@ -100,6 +117,7 @@ function FallApart(){
     this.draw = function() {
       background(255);
       fill(100);
+
       
       
       balls.forEach (ball => {
@@ -119,6 +137,9 @@ function FallApart(){
   
   // ==========================================================================
   
+
+    
+
   class Ball {
   
     // the constructor
@@ -257,7 +278,12 @@ function FallApart(){
           this.vy = 0;
           this.x = this.original_x;
           this.y = this.original_y;
+          if(this.movable){
+            correct_pieces += 1;
+          }
           this.movable = false; 
+          //correct_pieces += 1;
+          console.log(correct_pieces);
         }
       }
     go_back() {
