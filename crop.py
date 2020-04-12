@@ -2,8 +2,8 @@
 
 from PIL import Image
 
-img = Image.open("about.png")
-#img = Image.open("projects.png")
+img = Image.open("assets/about.png")
+#img = Image.open("assets/projects.png")
 
 
 side_size = 80

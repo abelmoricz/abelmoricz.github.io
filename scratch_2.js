@@ -56,10 +56,10 @@ function setup()
     }
 
     //back button loading
-    instruction_img = loadImage('instructions.png',function (pic) { print(img = pic), redraw(); },
+    instruction_img = loadImage('assets/instructions.png',function (pic) { print(img = pic), redraw(); },
     loadImageErrorOverride);
 
-    back_img = loadImage('back.png',function (pic) { print(img = pic), redraw(); },
+    back_img = loadImage('assets/back.png',function (pic) { print(img = pic), redraw(); },
     loadImageErrorOverride);
     
     // = row_num_projects;
