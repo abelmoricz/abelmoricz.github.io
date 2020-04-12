@@ -38,6 +38,7 @@ body {
     margin-left: -300px;
     width: 600px;
     margin-top: 150px;
+    display: block;
 }
 
 #projects {
