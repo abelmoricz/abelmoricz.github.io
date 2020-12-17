@@ -1,0 +1,62 @@
+
+
+html{
+    font-family: 'Courier New', Courier, monospace;
+    text-align: justify;
+}
+
+body {
+    margin:0;
+}
+
+#nav{
+    position: fixed;
+    left: 50%;
+    margin-left: -300px;
+    width: 600px;
+    display: block; 
+    margin-top: 50px;
+}
+h3 {
+    cursor: pointer;
+    font-weight: normal;
+    font-size: 26;
+}
+h2{
+    font-weight: normal;
+    font-size: 36
+}
+
+#AM{
+    float: left;
+}
+#P{
+    float:left;
+    margin-left: 18%;
+}
+#CM{
+    margin-left: 73%;
+}
+
+#about_me {
+    position: fixed;
+    font-size: small;
+    left: 50%;
+    margin-left: -300px;
+    width: 600px;
+    margin-top: 150px;
+    display: block;
+}
+
+#projects {
+    position: fixed;
+    font-size: small;
+    left: 50%;
+    margin-left: -300px;
+    width: 600px;
+    margin-top: 150px;
+    display: block;
+}
+
+
+
